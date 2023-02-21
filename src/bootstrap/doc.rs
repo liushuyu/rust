@@ -580,7 +580,6 @@ fn doc_std(
             .arg(&*target_dir.to_string_lossy())
             .arg("-p")
             .arg(package)
-            .arg("-Zskip-rustdoc-fingerprint")
             .arg("--")
             .arg("-Z")
             .arg("unstable-options")
@@ -677,7 +676,6 @@ impl Step for Rustc {
         cargo.rustdocflag("--generate-link-to-definition");
         compile::rustc_cargo(builder, &mut cargo, target);
         cargo.arg("-Zunstable-options");
-        cargo.arg("-Zskip-rustdoc-fingerprint");
 
         // Only include compiler crates, no dependencies of those, such as `libc`.
         // Do link to dependencies on `docs.rs` however using `rustdoc-map`.
@@ -793,7 +791,6 @@ macro_rules! tool_doc {
                     &[],
                 );
 
-                cargo.arg("-Zskip-rustdoc-fingerprint");
                 // Only include compiler crates, no dependencies of those, such as `libc`.
                 cargo.arg("--no-deps");
                 $(
