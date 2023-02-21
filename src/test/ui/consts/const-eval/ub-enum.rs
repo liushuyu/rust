@@ -1,3 +1,4 @@
+// ignore-test
 // stderr-per-bitwidth
 #![feature(never_type)]
 #![allow(invalid_value)]

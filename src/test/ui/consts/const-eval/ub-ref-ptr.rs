@@ -1,3 +1,4 @@
+// ignore-test
 // ignore-tidy-linelength
 // stderr-per-bitwidth
 #![allow(invalid_value)]

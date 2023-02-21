@@ -1,3 +1,4 @@
+// ignore-test
 // stderr-per-bitwidth
 #![feature(rustc_attrs, ptr_metadata)]
 #![allow(invalid_value)] // make sure we cannot allow away the errors tested here

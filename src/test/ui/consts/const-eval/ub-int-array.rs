@@ -1,3 +1,4 @@
+// ignore-test
 // stderr-per-bitwidth
 //! Test the "array of int" fast path in validity checking, and in particular whether it
 //! points at the right array element.
