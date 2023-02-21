@@ -969,7 +969,10 @@ impl Step for PlainSourceTarball {
         }
 
         // If we're building from git sources, we need to vendor a complete distribution.
-        if builder.rust_info().is_managed_git_subrepository() {
+        //
+        // Debian: disabling this block because the debian package is also in a git
+        //         repository, but cargo-vendor should not be installed or run.
+        if true && builder.rust_info().is_managed_git_subrepository() {
             // Ensure we have the submodules checked out.
             builder.update_submodule(Path::new("src/tools/rust-analyzer"));
 
