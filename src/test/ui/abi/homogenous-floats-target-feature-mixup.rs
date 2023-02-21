@@ -31,6 +31,13 @@ fn main() {
         Err(_) => return,
     }
 
+    // Debian: skip the test when building for i386
+    if let Ok(s) = env::var("DEB_TARGET_ARCH") {
+        if s == "i386" {
+            return;
+        }
+    }
+
     let me = env::current_exe().unwrap();
     for level in ["sse", "avx", "avx512"].iter() {
         let status = Command::new(&me).arg(level).status().unwrap();
