@@ -364,9 +364,13 @@ mod dist {
     #[test]
     fn dist_only_cross_host() {
         let b = TargetSelection::from_user("B");
+        let mut tools = std::collections::HashSet::new();
+        tools.insert("clippy".to_string());
+        tools.insert("rustfmt".to_string());
         let mut config = configure(&["A", "B"], &["A", "B"]);
         config.docs = false;
         config.extended = true;
+        config.tools = Some(tools);
         config.hosts = vec![b];
         let mut cache = run_build(&[], config);
 
