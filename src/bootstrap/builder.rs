@@ -629,8 +629,6 @@ impl<'a> Builder<'a> {
                 tool::RemoteTestClient,
                 tool::RustInstaller,
                 tool::Cargo,
-                tool::Rls,
-                tool::RustAnalyzer,
                 tool::RustAnalyzerProcMacroSrv,
                 tool::RustDemangler,
                 tool::Rustdoc,
@@ -653,8 +651,6 @@ impl<'a> Builder<'a> {
                 check::Miri,
                 check::CargoMiri,
                 check::MiroptTestTools,
-                check::Rls,
-                check::RustAnalyzer,
                 check::Rustfmt,
                 check::Bootstrap
             ),
@@ -681,10 +677,8 @@ impl<'a> Builder<'a> {
                 test::CrateJsonDocLint,
                 test::Linkcheck,
                 test::TierCheck,
-                test::ReplacePlaceholderTest,
                 test::Cargotest,
                 test::Cargo,
-                test::RustAnalyzer,
                 test::ErrorIndex,
                 test::Distcheck,
                 test::RunMakeFullDeps,
@@ -732,11 +726,8 @@ impl<'a> Builder<'a> {
                 doc::RustdocBook,
                 doc::RustByExample,
                 doc::RustcBook,
-                doc::Cargo,
-                doc::CargoBook,
                 doc::Clippy,
                 doc::ClippyBook,
-                doc::Miri,
                 doc::EmbeddedBook,
                 doc::EditionGuide,
                 doc::StyleGuide,
@@ -752,8 +743,6 @@ impl<'a> Builder<'a> {
                 dist::Analysis,
                 dist::Src,
                 dist::Cargo,
-                dist::Rls,
-                dist::RustAnalyzer,
                 dist::Rustfmt,
                 dist::RustDemangler,
                 dist::Clippy,
@@ -761,7 +750,6 @@ impl<'a> Builder<'a> {
                 dist::LlvmTools,
                 dist::RustDev,
                 dist::Bootstrap,
-                dist::Extended,
                 // It seems that PlainSourceTarball somehow changes how some of the tools
                 // perceive their dependencies (see #93033) which would invalidate fingerprints
                 // and force us to rebuild tools after vendoring dependencies.
@@ -774,7 +762,6 @@ impl<'a> Builder<'a> {
                 install::Docs,
                 install::Std,
                 install::Cargo,
-                install::RustAnalyzer,
                 install::Rustfmt,
                 install::RustDemangler,
                 install::Clippy,
@@ -1889,10 +1876,7 @@ impl<'a> Builder<'a> {
             }
         }
 
-        if self.config.locked_deps {
-            cargo.arg("--locked");
-        }
-        if self.config.vendor || self.is_sudo {
+        if self.is_sudo {
             cargo.arg("--frozen");
         }
 

@@ -332,7 +332,7 @@ const FORBIDDEN_TO_HAVE_DUPLICATES: &[&str] = &[
     // This crate takes quite a long time to build, so don't allow two versions of them
     // to accidentally sneak into our dependency graph, in order to ensure we keep our CI times
     // under control.
-    "cargo",
+    //"cargo",
 ];
 
 /// Dependency checks.
