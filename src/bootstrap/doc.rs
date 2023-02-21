@@ -351,6 +351,8 @@ impl Step for Standalone {
                 .arg(&builder.src.join("src/doc/index.md"))
                 .arg("--markdown-playground-url")
                 .arg("https://play.rust-lang.org/")
+                .arg("--markdown-css")
+                .arg("rust.css")
                 .arg("-o")
                 .arg(&out)
                 .arg(&path);
@@ -359,11 +361,6 @@ impl Step for Standalone {
                 cmd.arg("--disable-minification");
             }
 
-            if filename == "not_found.md" {
-                cmd.arg("--markdown-css").arg("https://doc.rust-lang.org/rust.css");
-            } else {
-                cmd.arg("--markdown-css").arg("rust.css");
-            }
             builder.run(&mut cmd);
         }
 
