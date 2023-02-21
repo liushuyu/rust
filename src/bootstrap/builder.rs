@@ -1239,9 +1239,9 @@ impl<'a> Builder<'a> {
         // complete list of features, so for that reason we don't enable checking of
         // features for std crates.
         cargo.arg(if mode != Mode::Std {
-            "-Zcheck-cfg=names,values,output,features"
+            "-Zcheck-cfg=names,values,features"
         } else {
-            "-Zcheck-cfg=names,values,output"
+            "-Zcheck-cfg=names,values"
         });
 
         // Add extra cfg not defined in/by rustc
