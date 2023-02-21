@@ -46,6 +46,9 @@ exclude = [
   "src/tools/x",
   # stdarch has its own Cargo workspace
   "library/stdarch",
+  # dh-cargo-vendored-sources needs to be able to run cargo metadata on
+  # vendored crates
+  "vendor/",
 ]
 
 [profile.release.package.compiler_builtins]
