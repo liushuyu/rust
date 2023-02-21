@@ -1,2 +1,6 @@
+include ../tools.mk
+
+RUSTC := $(RUSTC_ORIGINAL)
+
 all:
-	'$(PYTHON)' test.py
+	$(HOST_RPATH_ENV) '$(PYTHON)' test.py
