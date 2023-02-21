@@ -1296,14 +1296,15 @@ impl Build {
             return s;
         }
 
-        // Figure out how many merge commits happened since we branched off master.
-        // That's our beta number!
-        // (Note that we use a `..` range, not the `...` symmetric difference.)
-        let count =
-            output(self.config.git().arg("rev-list").arg("--count").arg("--merges").arg(format!(
-                "refs/remotes/origin/{}..HEAD",
-                self.config.stage0_metadata.config.nightly_branch
-            )));
+        // Debian: read beta number from "version" file, this is only available
+        // in the rustc upstream tarballs and not their git
+        let count = output(
+            Command::new("sed")
+                .arg("-re")
+                .arg(r"s/[0-9]+.[0-9]+.[0-9]+-beta.([0-9]+) \(.*\)/\1/g")
+                .arg("version")
+                .current_dir(&self.src),
+            );
         let n = count.trim().parse().unwrap();
         self.prerelease_version.set(Some(n));
         n
