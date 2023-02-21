@@ -15,6 +15,12 @@ fn main() {
         }
         Err(_) => return,
     }
+    // Debian: skip the test when building for i386
+    if let Ok(s) = env::var("DEB_TARGET_ARCH") {
+        if s == "i386" {
+            return;
+        }
+    }
     if cfg!(any(target_arch = "x86", target_arch = "x86_64")) {
         assert!(cfg!(target_feature = "sse2"),
                 "SSE2 was not detected as available on an x86 platform");
