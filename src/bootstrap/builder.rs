@@ -1266,6 +1266,18 @@ impl<'a> Builder<'a> {
             }
         }
 
+        // Debian-specific stuff here
+        // set linker flags from LDFLAGS
+        if let Ok(ldflags) = env::var("LDFLAGS") {
+            for flag in ldflags.split_whitespace() {
+                if target.contains("windows") && flag.contains("relro") {
+                    // relro is ELF-specific
+                    continue;
+                }
+                rustflags.arg(&format!("-Clink-args={}", flag));
+            }
+        }
+
         // FIXME: It might be better to use the same value for both `RUSTFLAGS` and `RUSTDOCFLAGS`,
         // but this breaks CI. At the very least, stage0 `rustdoc` needs `--cfg bootstrap`. See
         // #71458.
