@@ -37,7 +37,11 @@ pub struct Info {
 impl GitInfo {
     pub fn new(ignore_git: bool, dir: &Path) -> GitInfo {
         // See if this even begins to look like a git dir
-        if !dir.join(".git").exists() {
+        //
+        // Debian: force-enabling this block because the debian package is also in a git
+        //         repository, but we don't want to parse gitinfo. This is needed for the
+        //         bootstrap tests to work which running for Debian git.
+        if true || !dir.join(".git").exists() {
             match read_commit_info_file(dir) {
                 Some(info) => return GitInfo::RecordedForTarball(info),
                 None => return GitInfo::Absent,
