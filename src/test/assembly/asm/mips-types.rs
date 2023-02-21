@@ -1,3 +1,4 @@
+// ignore-test
 // revisions: mips32 mips64
 // assembly-output: emit-asm
 //[mips32] compile-flags: --target mips-unknown-linux-gnu

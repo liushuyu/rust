@@ -746,6 +746,8 @@ class RustBuild(object):
 
         # preserve existing RUSTFLAGS
         env.setdefault("RUSTFLAGS", "")
+        if self.build_triple().startswith('mips'):
+            env["RUSTFLAGS"] += " -Ctarget-feature=+xgot"
         target_features = []
         if self.get_toml("crt-static", build_section) == "true":
             target_features += ["+crt-static"]
