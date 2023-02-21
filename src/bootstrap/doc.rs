@@ -74,7 +74,6 @@ macro_rules! book {
 // FIXME: Make checking for a submodule automatic somehow (maybe by having a list of all submodules
 // and checking against it?).
 book!(
-    CargoBook, "src/tools/cargo/src/doc", "cargo", submodule = "src/tools/cargo";
     ClippyBook, "src/tools/clippy/book", "clippy";
     EditionGuide, "src/doc/edition-guide", "edition-guide", submodule;
     EmbeddedBook, "src/doc/embedded-book", "embedded-book", submodule;

@@ -1,5 +1,14 @@
 [workspace]
-members = ["xtask/", "lib/*", "crates/*"]
+members = [
+  "xtask/",
+  "lib/*",
+  "crates/proc-macro-srv",
+  "crates/proc-macro-srv-cli",
+  "crates/tt",
+  "crates/mbe",
+  "crates/paths",
+  "crates/proc-macro-api",
+]
 exclude = ["crates/proc-macro-test/imp"]
 
 [profile.dev]

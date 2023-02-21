@@ -767,10 +767,6 @@ class RustBuild(object):
                 os.path.join(self.rust_root, "src/bootstrap/Cargo.toml")]
         for _ in range(0, self.verbose):
             args.append("--verbose")
-        if self.use_locked_deps:
-            args.append("--locked")
-        if self.use_vendored_sources:
-            args.append("--frozen")
         if self.get_toml("metrics", "build"):
             args.append("--features")
             args.append("build-metrics")
