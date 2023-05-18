@@ -1437,6 +1437,19 @@ impl<'a> Builder<'a> {
             }
         }
 
+        // set linker flags from LDFLAGS
+        if let Ok(ldflags) = env::var("LDFLAGS") {
+            let mut args = Vec::new();
+            for flag in ldflags.split_whitespace() {
+                if !target.contains("linux") && flag.contains("relro") {
+                    // relro is ELF-specific
+                    continue;
+                }
+                args.push(flag);
+            }
+            rustflags.arg(&format!("-Clink-args={}", args.join(" ")));
+        }
+
         // FIXME: It might be better to use the same value for both `RUSTFLAGS` and `RUSTDOCFLAGS`,
         // but this breaks CI. At the very least, stage0 `rustdoc` needs `--cfg bootstrap`. See
         // #71458.
